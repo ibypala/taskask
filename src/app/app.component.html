@@ -1,0 +1,28 @@
+<app-header (addTask)="addTask()"></app-header>
+
+<main class="main-content">
+  <div class="container">
+    <div class="tasks-grid">
+      @for (task of taskService.allTasks(); track task.id) {
+        <app-task-card
+          [id]="task.id"
+          [title]="task.title"
+          [text]="task.text || ''"
+          (cardClick)="openTask($event)"
+        ></app-task-card>
+      } @empty {
+        <div class="empty-state">
+          <p>Нет задач. Добавьте первую!</p>
+        </div>
+      }
+    </div>
+  </div>
+</main>
+
+<app-task-detail
+  [task]="selectedTask"
+  (close)="closeTaskDetail()"
+  (save)="saveTaskDetail($event)"
+  (delete)="deleteTaskFromDetail()"
+  (respond)="onRespond()"
+></app-task-detail>

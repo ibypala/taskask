@@ -1,0 +1,35 @@
+<app-header 
+  [isAdmin]="authService.isAdmin()"
+  [currentUser]="authService.getCurrentUser()"
+  (addTask)="addTask()"
+  (logout)="logout()"
+></app-header>
+
+<main class="main-content">
+  <div class="container">
+    <div class="tasks-grid">
+      @for (task of taskService.allTasks(); track task.id) {
+        <app-task-card
+          [id]="task.id"
+          [title]="task.title"
+          [text]="task.text || ''"
+          [image]="task.image || ''"
+          (cardClick)="openTask($event)"
+        ></app-task-card>
+      } @empty {
+        <div class="empty-state">
+          <p>Нет задач. {{ authService.isAdmin() ? 'Добавьте первую!' : 'Пока нет доступных задач.' }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</main>
+
+<app-task-detail
+  [task]="selectedTask"
+  [isAdmin]="authService.isAdmin()"
+  (close)="closeTaskDetail()"
+  (save)="saveTaskDetail($event)"
+  (delete)="deleteTaskFromDetail()"
+  (respond)="onRespond()"
+></app-task-detail>

@@ -1,0 +1,99 @@
+<div class="modal-backdrop" *ngIf="task">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title" *ngIf="!isEditing">{{ task.title }}</h2>
+      <input 
+        type="text" 
+        [(ngModel)]="editTitle" 
+        placeholder="Название задачи"
+        class="modal-title-edit"
+        *ngIf="isEditing"
+        autofocus
+      />
+      <button class="btn-close" (click)="close.emit()" title="Закрыть">✕</button>
+    </div>
+
+    <div class="modal-body" *ngIf="!isEditing">
+      <div class="task-meta">
+        <span class="task-date">Создано: {{ task.createdAt | date:'dd.MM.yyyy HH:mm' }}</span>
+      </div>
+      <div class="task-image" *ngIf="task.image" (click)="openImageFullscreen(task.image)">
+        <img [src]="task.image" [alt]="task.title" />
+      </div>
+      <div class="task-description" *ngIf="task.text" [innerHTML]="task.text"></div>
+      <div class="task-description empty" *ngIf="!task.text">
+        <p class="no-description">Описание отсутствует</p>
+      </div>
+    </div>
+
+    <div class="modal-body editing" *ngIf="isEditing">
+      <div class="form-group">
+        <label>Изображение:</label>
+        <div class="image-upload-section">
+          <div class="current-image" *ngIf="selectedImagePreview || task.image">
+            <img [src]="selectedImagePreview || task.image" alt="Preview" />
+            <button 
+              type="button" 
+              class="btn-remove-image" 
+              (click)="removeImage()"
+              title="Удалить изображение"
+            >
+              ✕
+            </button>
+          </div>
+          <input 
+            type="file" 
+            (change)="onFileSelected($event)" 
+            accept="image/*"
+            class="file-input"
+            #fileInput
+          />
+          <button 
+            type="button" 
+            class="btn-choose-file" 
+            (click)="fileInput.click()"
+          >
+            📷 {{ (selectedImagePreview || task.image) ? 'Заменить фото' : 'Выбрать фото' }}
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Описание:</label>
+        <textarea 
+          [(ngModel)]="editText" 
+          placeholder="Описание задачи"
+          class="edit-text-large"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="footer-left">
+        <button class="btn-respond" (click)="respond.emit()" *ngIf="!isEditing">
+          ✉️ Откликнуться
+        </button>
+        <button class="btn-danger" *ngIf="isAdmin && isEditing" (click)="onDelete()">
+          🗑️ Удалить
+        </button>
+      </div>
+      <div class="footer-right">
+        <button class="btn-secondary" *ngIf="!isEditing && isAdmin" (click)="startEdit()">
+          ✏️ Редактировать
+        </button>
+        <button class="btn-secondary" *ngIf="isEditing" (click)="cancelEdit()">
+          Отмена
+        </button>
+        <button class="btn-primary" *ngIf="isEditing" (click)="saveEdit()">
+          💾 Сохранить
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Полноэкранный просмотр изображения -->
+<div class="image-fullscreen" *ngIf="fullscreenImage" (click)="closeImageFullscreen()">
+  <button class="btn-close-fullscreen" (click)="closeImageFullscreen()" title="Закрыть">✕</button>
+  <img [src]="fullscreenImage" alt="Fullscreen" (click)="$event.stopPropagation()" />
+</div>

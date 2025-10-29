@@ -1,0 +1,15 @@
+<div class="task-card" (click)="onClick()">
+  <div class="task-image" *ngIf="image">
+    <img [src]="image" [alt]="title" />
+  </div>
+  <div class="task-content">
+    <h3 class="task-title">{{ title }}</h3>
+    <p class="task-description" *ngIf="text">{{ text }}</p>
+  </div>
+  <div class="task-actions">
+    <button class="btn-more" title="Подробнее">
+      <span class="more-icon">→</span>
+      <span class="more-text">Подробнее</span>
+    </button>
+  </div>
+</div>

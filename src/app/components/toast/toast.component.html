@@ -1,0 +1,18 @@
+<div class="toast-wrap" aria-live="polite" aria-atomic="true">
+  <div *ngFor="let t of toast.toasts()" class="toast" [ngClass]="t.type" [class.hidden]="t.type === 'confirm'">
+    <div class="message">{{ t.message }}</div>
+    <button class="close" (click)="toast.remove(t.id)">✕</button>
+  </div>
+</div>
+
+<div *ngFor="let t of toast.toasts()">
+  <div *ngIf="t.type === 'confirm'" class="confirm-overlay">
+    <div class="confirm-modal">
+      <div class="confirm-message">{{ t.message }}</div>
+      <div class="confirm-actions">
+        <button class="btn-cancel" (click)="t.onCancel && t.onCancel()">Отмена</button>
+        <button class="btn-confirm" (click)="t.onConfirm && t.onConfirm()">Удалить</button>
+      </div>
+    </div>
+  </div>
+</div>
