@@ -28,13 +28,13 @@ export class ThemeService {
       root.classList.add('dark');
       localStorage.setItem('theme', 'dark');
       if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', '#161b22');
+        metaThemeColor.setAttribute('content', '#212529');
       }
     } else {
       root.classList.remove('dark');
       localStorage.setItem('theme', 'light');
       if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', '#f8f9fa');
+        metaThemeColor.setAttribute('content', '#ffffff');
       }
     }
   }

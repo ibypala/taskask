@@ -6,10 +6,9 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
   <meta name="description" content="Taskask - система управления задачами">
-  <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161b22" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Taskask">
   <meta name="format-detection" content="telephone=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -22,11 +21,11 @@
       if (isDark) {
         document.documentElement.classList.add('dark');
         if (metaThemeColor) {
-          metaThemeColor.setAttribute('content', '#161b22');
+          metaThemeColor.setAttribute('content', '#212529');
         }
       } else {
         if (metaThemeColor) {
-          metaThemeColor.setAttribute('content', '#f8f9fa');
+          metaThemeColor.setAttribute('content', '#ffffff');
         }
       }
     })();
