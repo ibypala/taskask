@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ubludo</title>
+  <base href="/taskask/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // GitHub Pages SPA redirect hack
+    // Сохраняем путь и перенаправляем на index.html
+    sessionStorage.setItem('redirectPath', location.pathname + location.search);
+    location.replace(location.origin + '/taskask/');
+  </script>
+</head>
+<body>
+</body>
+</html>
