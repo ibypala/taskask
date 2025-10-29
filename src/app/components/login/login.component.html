@@ -32,6 +32,10 @@
           name="username"
           placeholder="Введите логин"
           [disabled]="isLoading"
+          autocapitalize="none"
+          autocorrect="off"
+          autocomplete="username"
+          spellcheck="false"
           required
         />
       </div>
@@ -45,6 +49,7 @@
           name="password"
           placeholder="Введите пароль"
           [disabled]="isLoading"
+          autocomplete="current-password"
           required
         />
       </div>
