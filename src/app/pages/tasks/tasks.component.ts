@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
 import { TaskCardComponent } from '../../components/task-card/task-card.component';
 import { TaskDetailComponent } from '../../components/task-detail/task-detail.component';
+import { TaskAddComponent } from '../../components/task-add/task-add.component';
 import { TaskService } from '../../services/task.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
@@ -13,12 +14,13 @@ import { Task } from '../../models/task.interface';
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, TaskCardComponent, TaskDetailComponent],
+  imports: [CommonModule, HeaderComponent, TaskCardComponent, TaskDetailComponent, TaskAddComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
 export class TasksComponent {
   selectedTask: Task | null = null;
+  showAddModal = false;
 
   constructor(
     public taskService: TaskService,
@@ -35,17 +37,21 @@ export class TasksComponent {
       return;
     }
 
-    const title = prompt('Название задачи:');
-    if (title) {
-      const text = prompt('Описание задачи (опционально):');
-      // Показать глобальный лоадер на небольшое время для UX
-      this.loading.show();
-      setTimeout(() => {
-        this.taskService.addTask(title, text || '');
-        this.loading.hide();
-        this.toast.success('Задача добавлена');
-      }, 600);
-    }
+    this.showAddModal = true;
+  }
+
+  closeAddModal() {
+    this.showAddModal = false;
+  }
+
+  saveNewTask(data: {title: string, text: string, image?: string}) {
+    this.loading.show();
+    setTimeout(() => {
+      this.taskService.addTask(data.title, data.text, data.image);
+      this.loading.hide();
+      this.toast.success('Задача добавлена');
+      this.showAddModal = false;
+    }, 600);
   }
 
   openTask(id: number) {

@@ -25,6 +25,12 @@
   </div>
 </main>
 
+<app-task-add
+  *ngIf="showAddModal"
+  (close)="closeAddModal()"
+  (save)="saveNewTask($event)"
+></app-task-add>
+
 <app-task-detail
   [task]="selectedTask"
   [isAdmin]="authService.isAdmin()"
