@@ -10,8 +10,8 @@
     <div class="confirm-modal">
       <div class="confirm-message">{{ t.message }}</div>
       <div class="confirm-actions">
-        <button class="btn-cancel" (click)="t.onCancel && t.onCancel()">Отмена</button>
-        <button class="btn-confirm" (click)="t.onConfirm && t.onConfirm()">Удалить</button>
+        <button class="btn-confirm" (click)="t.onConfirm && t.onConfirm()">{{ t.confirmText || 'Подтвердить' }}</button>
+        <button class="btn-cancel" (click)="t.onCancel && t.onCancel()">{{ t.cancelText || 'Отмена' }}</button>
       </div>
     </div>
   </div>

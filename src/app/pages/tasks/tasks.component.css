@@ -19,21 +19,143 @@
 .empty-state {
   grid-column: 1 / -1;
   text-align: center;
-  padding: 60px 20px;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
+.empty-icon {
+  font-size: 5rem;
+  opacity: 0.6;
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.empty-description {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.empty-action {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 71, 132, 0.25);
+}
+
+.empty-action:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 20px rgba(0, 71, 132, 0.35);
+  transform: translateY(-2px);
+}
+
+.empty-action .plus-icon {
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
 @media (max-width: 768px) {
+  .main-content {
+    margin-top: 60px;
+    padding: 20px 0;
+    min-height: calc(100vh - 60px);
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
   .tasks-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
-  
-  .container {
-    padding: 0 20px;
+
+  .empty-state {
+    padding: 60px 16px;
   }
-  
+
+  .empty-icon {
+    font-size: 4rem;
+  }
+
+  .empty-title {
+    font-size: 1.3rem;
+  }
+
+  .empty-description {
+    font-size: 0.95rem;
+  }
+
+  .empty-action {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
   .main-content {
-    padding: 20px 0;
+    margin-top: 56px;
+    padding: 16px 0;
+    min-height: calc(100vh - 56px);
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .tasks-grid {
+    gap: 12px;
+  }
+
+  .empty-state {
+    padding: 40px 12px;
+  }
+
+  .empty-icon {
+    font-size: 3.5rem;
+  }
+
+  .empty-title {
+    font-size: 1.2rem;
+  }
+
+  .empty-description {
+    font-size: 0.9rem;
+  }
+
+  .empty-action {
+    padding: 9px 18px;
+    font-size: 0.9rem;
   }
 }

@@ -7,6 +7,8 @@ interface Toast {
   type: ToastType;
   onConfirm?: () => void;
   onCancel?: () => void;
+  confirmText?: string;
+  cancelText?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -37,12 +39,14 @@ export class ToastService {
     return this.show(message, 'info', timeout);
   }
 
-  confirm(message: string, onConfirm: () => void, onCancel?: () => void) {
+  confirm(message: string, onConfirm: () => void, onCancel?: () => void, confirmText?: string, cancelText?: string) {
     const id = this.seq++;
     const t: Toast = { 
       id, 
       message, 
       type: 'confirm',
+      confirmText,
+      cancelText,
       onConfirm: () => {
         this.remove(id);
         onConfirm();

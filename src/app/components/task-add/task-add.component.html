@@ -1,5 +1,10 @@
 <div class="modal-overlay">
-  <div class="modal">
+  <div 
+    class="modal"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
     <div class="modal-header">
       <h2>Добавить задачу</h2>
       <button class="close-btn" (click)="onCancel()">✕</button>
@@ -61,8 +66,11 @@
     </div>
 
     <div class="modal-footer">
-      <button class="btn-cancel" (click)="onCancel()">Отмена</button>
-      <button class="btn-save" (click)="onSave()" [disabled]="!title.trim()">Создать</button>
+      <button class="btn-save" (click)="onSave()" [disabled]="!title.trim() || isSaving">
+        <span *ngIf="!isSaving">Создать</span>
+        <span *ngIf="isSaving" class="loading-text">⏳ Создание...</span>
+      </button>
+      <button class="btn-cancel" (click)="onCancel()" [disabled]="isSaving">Отмена</button>
     </div>
   </div>
 </div>

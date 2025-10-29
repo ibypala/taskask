@@ -14,15 +14,15 @@
   background: #ffffff;
   border: 2px solid rgb(0, 71, 132);
   border-radius: 12px;
-  padding: 12px;
+  padding: 10px;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 71, 132, 0.15);
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
 }
 
 :host-context(.dark) .theme-toggle-login {
@@ -186,4 +186,88 @@
 :host-context(.dark) .demo-info {
   background: rgba(0, 100, 180, 0.1);
   border-color: rgba(0, 100, 180, 0.2);
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 28px;
+    max-width: 100%;
+  }
+
+  .login-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-header p {
+    font-size: 0.9rem;
+  }
+
+  .theme-toggle-login {
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+  }
+
+  .theme-toggle-login .theme-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 12px;
+  }
+
+  .login-card {
+    padding: 24px;
+    border-width: 1.5px;
+  }
+
+  .login-header {
+    margin-bottom: 24px;
+  }
+
+  .login-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .login-form {
+    gap: 16px;
+  }
+
+  .form-group input {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+
+  .btn-login {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .theme-toggle-login {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+
+  .theme-toggle-login .theme-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .demo-info {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
 }

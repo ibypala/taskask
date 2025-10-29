@@ -80,11 +80,9 @@ export class TasksComponent {
     }
 
     if (this.selectedTask) {
-      this.toast.confirm('Удалить эту задачу?', () => {
-        this.taskService.deleteTask(this.selectedTask!.id);
-        this.toast.success('Задача удалена');
-        this.selectedTask = null;
-      });
+      this.taskService.deleteTask(this.selectedTask.id);
+      this.toast.success('Задача удалена');
+      this.selectedTask = null;
     }
   }
 

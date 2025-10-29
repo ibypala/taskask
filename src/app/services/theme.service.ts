@@ -22,12 +22,20 @@ export class ThemeService {
 
   private applyTheme(isDark: boolean) {
     const root = document.documentElement;
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    
     if (isDark) {
       root.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', '#161b22');
+      }
     } else {
       root.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', '#f8f9fa');
+      }
     }
   }
 

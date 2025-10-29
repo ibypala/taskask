@@ -18,7 +18,17 @@
         ></app-task-card>
       } @empty {
         <div class="empty-state">
-          <p>Нет задач. {{ authService.isAdmin() ? 'Добавьте первую!' : 'Пока нет доступных задач.' }}</p>
+          <div class="empty-icon">📋</div>
+          <h2 class="empty-title">{{ authService.isAdmin() ? 'Задач пока нет' : 'Нет доступных задач' }}</h2>
+          <p class="empty-description">
+            {{ authService.isAdmin() 
+              ? 'Нажмите кнопку "Добавить задачу" чтобы создать первую задачу' 
+              : 'Пока нет задач для выполнения. Проверьте позже.' 
+            }}
+          </p>
+          <button *ngIf="authService.isAdmin()" class="empty-action" (click)="addTask()">
+            <span class="plus-icon">+</span> Создать первую задачу
+          </button>
         </div>
       }
     </div>

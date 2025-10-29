@@ -1,5 +1,10 @@
 <div class="modal-backdrop" *ngIf="task">
-  <div class="modal-content">
+  <div 
+    class="modal-content"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
     <div class="modal-header">
       <h2 class="modal-title" *ngIf="!isEditing">{{ task.title }}</h2>
       <input 
@@ -70,22 +75,24 @@
 
     <div class="modal-footer">
       <div class="footer-left">
-        <button class="btn-respond" (click)="respond.emit()" *ngIf="!isEditing">
+        <button class="btn-respond" (click)="respond.emit()" *ngIf="!isEditing" [disabled]="isSaving || isDeleting">
           ✉️ Откликнуться
         </button>
-        <button class="btn-danger" *ngIf="isAdmin && isEditing" (click)="onDelete()">
-          🗑️ Удалить
+        <button class="btn-danger" *ngIf="isAdmin && isEditing" (click)="onDelete()" [disabled]="isSaving || isDeleting">
+          <span *ngIf="!isDeleting">🗑️ Удалить</span>
+          <span *ngIf="isDeleting" class="loading-text">⏳ Удаление...</span>
         </button>
       </div>
       <div class="footer-right">
-        <button class="btn-secondary" *ngIf="!isEditing && isAdmin" (click)="startEdit()">
+        <button class="btn-secondary" *ngIf="!isEditing && isAdmin" (click)="startEdit()" [disabled]="isSaving || isDeleting">
           ✏️ Редактировать
         </button>
-        <button class="btn-secondary" *ngIf="isEditing" (click)="cancelEdit()">
+        <button class="btn-secondary" *ngIf="isEditing" (click)="cancelEdit()" [disabled]="isSaving || isDeleting">
           Отмена
         </button>
-        <button class="btn-primary" *ngIf="isEditing" (click)="saveEdit()">
-          💾 Сохранить
+        <button class="btn-primary" *ngIf="isEditing" (click)="saveEdit()" [disabled]="isSaving || isDeleting">
+          <span *ngIf="!isSaving">💾 Сохранить</span>
+          <span *ngIf="isSaving" class="loading-text">⏳ Сохранение...</span>
         </button>
       </div>
     </div>
