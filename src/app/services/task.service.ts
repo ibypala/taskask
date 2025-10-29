@@ -54,8 +54,4 @@ export class TaskService {
       )
     );
   }
-
-  getTask(id: number): Task | undefined {
-    return this.tasks().find(task => task.id === id);
-  }
 }

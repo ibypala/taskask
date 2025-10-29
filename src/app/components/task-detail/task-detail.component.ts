@@ -33,10 +33,8 @@ export class TaskDetailComponent {
       this.selectedImagePreview = null;
       this.imageRemoved = false;
       this.isEditing = false;
-      // Блокируем скролл body когда модалка открыта
       document.body.style.overflow = 'hidden';
     } else {
-      // Разблокируем скролл когда модалка закрыта
       document.body.style.overflow = '';
     }
   }
@@ -109,7 +107,6 @@ export class TaskDetailComponent {
   }
 
   ngOnDestroy() {
-    // Разблокируем скролл при уничтожении компонента
     document.body.style.overflow = '';
   }
 }

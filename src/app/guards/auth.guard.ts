@@ -16,13 +16,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     if (this.authService.isAuthenticated()) {
-      // Проверяем роль если указана в route data
-      const requiredRole = route.data['role'];
-      if (requiredRole && !this.authService.hasRole(requiredRole)) {
-        // Нет доступа - редирект на главную
-        this.router.navigate(['/']);
-        return false;
-      }
       return true;
     }
 

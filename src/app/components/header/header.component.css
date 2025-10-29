@@ -98,33 +98,32 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  gap: 6px;
+  padding: 10px 18px;
+  min-width: 44px;
   background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(0, 71, 132, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  min-width: 40px;
-  height: 40px;
 }
 
 :host-context(.dark) .theme-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(0, 100, 180, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .theme-toggle:hover {
   background: rgba(0, 71, 132, 0.1);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 71, 132, 0.2);
-  border-color: rgba(0, 71, 132, 0.5);
 }
 
 :host-context(.dark) .theme-toggle:hover {
   background: rgba(0, 100, 180, 0.15);
   box-shadow: 0 4px 12px rgba(0, 100, 180, 0.25);
-  border-color: rgba(0, 100, 180, 0.6);
 }
 
 .theme-icon {

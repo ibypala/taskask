@@ -8,8 +8,7 @@ import { LoadingOverlayComponent } from './components/loading-overlay/loading-ov
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, ToastComponent, LoadingOverlayComponent],
-  template: '<app-toast></app-toast><app-loading-overlay></app-loading-overlay><router-outlet></router-outlet>',
-  styleUrl: './app.component.css'
+  template: '<app-toast></app-toast><app-loading-overlay></app-loading-overlay><router-outlet></router-outlet>'
 })
 export class AppComponent {
 }

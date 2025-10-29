@@ -31,7 +31,6 @@ export class TasksComponent {
   ) {}
 
   addTask() {
-    // Только админ может добавлять задачи
     if (!this.authService.isAdmin()) {
       this.toast.error('Только администратор может добавлять задачи');
       return;
@@ -45,17 +44,13 @@ export class TasksComponent {
   }
 
   saveNewTask(data: {title: string, text: string, image?: string}) {
-    this.loading.show();
-    setTimeout(() => {
-      this.taskService.addTask(data.title, data.text, data.image);
-      this.loading.hide();
-      this.toast.success('Задача добавлена');
-      this.showAddModal = false;
-    }, 600);
+    this.taskService.addTask(data.title, data.text, data.image);
+    this.toast.success('Задача добавлена');
+    this.showAddModal = false;
   }
 
   openTask(id: number) {
-    const task = this.taskService.getTask(id);
+    const task = this.taskService.allTasks().find(t => t.id === id);
     if (task) {
       this.selectedTask = task;
     }
@@ -66,25 +61,19 @@ export class TasksComponent {
   }
 
   saveTaskDetail(data: {title: string, text: string, image?: string}) {
-    // Только админ может редактировать
     if (!this.authService.isAdmin()) {
       this.toast.error('Только администратор может редактировать задачи');
       return;
     }
 
     if (this.selectedTask) {
-      this.loading.show();
-      setTimeout(() => {
-        this.taskService.updateTask(this.selectedTask!.id, data.title, data.text, data.image);
-        this.selectedTask = this.taskService.getTask(this.selectedTask!.id) || null;
-        this.loading.hide();
-        this.toast.success('Изменения сохранены');
-      }, 500);
+      this.taskService.updateTask(this.selectedTask.id, data.title, data.text, data.image);
+      this.selectedTask = this.taskService.allTasks().find(t => t.id === this.selectedTask!.id) || null;
+      this.toast.success('Изменения сохранены');
     }
   }
 
   deleteTaskFromDetail() {
-    // Только админ может удалять
     if (!this.authService.isAdmin()) {
       this.toast.error('Только администратор может удалять задачи');
       return;
@@ -92,23 +81,17 @@ export class TasksComponent {
 
     if (this.selectedTask) {
       this.toast.confirm('Удалить эту задачу?', () => {
-        this.loading.show();
-        setTimeout(() => {
-          this.taskService.deleteTask(this.selectedTask!.id);
-          this.loading.hide();
-          this.toast.success('Задача удалена');
-          this.selectedTask = null;
-        }, 500);
+        this.taskService.deleteTask(this.selectedTask!.id);
+        this.toast.success('Задача удалена');
+        this.selectedTask = null;
       });
     }
   }
 
   onRespond() {
-    // Пользователи могут откликаться
     if (this.selectedTask) {
       const user = this.authService.getCurrentUser();
       this.toast.info(`Отклик на задачу "${this.selectedTask.title}" от ${user?.username}`);
-      // Здесь будет логика отправки отклика
     }
   }
 
